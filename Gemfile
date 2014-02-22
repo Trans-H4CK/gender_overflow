@@ -20,6 +20,9 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'foundation-rails'
 
+group :production, :staging
+  gem 'rails_12factor'
+end
 
 group :assets do
   gem 'turbo-sprockets-rails3'
