@@ -20,13 +20,14 @@
       <% if content_for? :headline %>
         <h1><%= yield :headline %></h1>
       <% end %>
+      <%= render :partial => 'layouts/flash' , :locals => { :flash => flash } %>
+
+      <div id="main">
+        <%= yield %>
+      </div>
     </div>
 
-    <%= render :partial => 'layouts/flash' , :locals => { :flash => flash } %>
 
-    <div id="main">
-      <%= yield %>
-    </div>
 
     <div id="footer">
     </div>
