@@ -17,5 +17,4 @@
 .ruby-version
 .ruby-gemset
 config/database.yml
-config/secret_token.rb
 
