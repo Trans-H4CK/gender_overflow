@@ -37,6 +37,7 @@ GEM
     byebug (2.6.0)
       columnize (~> 0.3)
       debugger-linecache (~> 1.2)
+    cancan (1.6.10)
     capybara (2.2.1)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -205,6 +206,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   byebug
+  cancan
   capybara
   database_cleaner (~> 1.0.0.RC1)
   devise

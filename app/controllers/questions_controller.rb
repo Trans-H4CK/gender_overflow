@@ -1,9 +1,8 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /questions
   def index
-    @questions = Question.all
   end
 
   # GET /questions/1
@@ -12,7 +11,6 @@ class QuestionsController < ApplicationController
 
   # GET /questions/new
   def new
-    @question = Question.new
   end
 
   # GET /questions/1/edit
@@ -21,8 +19,6 @@ class QuestionsController < ApplicationController
 
   # POST /questions
   def create
-    @question = Question.new(question_params)
-
     if @question.save
       redirect_to @question, notice: 'Question was successfully created.'
     else
@@ -46,10 +42,6 @@ class QuestionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_question
-      @question = Question.find(params[:id])
-    end
 
     # Only allow a trusted parameter "white list" through.
     def question_params
