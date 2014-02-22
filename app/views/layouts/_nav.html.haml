@@ -1,0 +1,19 @@
+%nav#nav.top-bar.contain-to-grid{:"data-topbar" => true}
+  %ul.title-area
+    %li.name
+      %h1
+        = link_to "Gender Overflow", root_path
+    %li.toggle-topbar.menu-icon
+      %a{:href => '#'}
+        Menu
+  %section.top-bar-section
+    %ul.left#user_tools
+      %li= link_to "Questions", questions_path
+
+    %ul.right
+      - if current_user
+        %li= link_to "Edit User", edit_user_registration_path
+        %li= link_to "Sign Out", logout_path, :method => :delete
+      - else
+        %li= link_to "Sign in", login_path unless current_page?(login_path)
+        %li= link_to "Sign Up", sign_up_path unless current_page?(sign_up_path)

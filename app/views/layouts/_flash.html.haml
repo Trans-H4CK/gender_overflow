@@ -1,0 +1,13 @@
+- if flash[:error] || flash[:alert]
+  #error_explanation
+    %h2= t 'errors.generic'
+    %ul
+      - flash.select{|k,v| [ :error, :alert ].include?(k)}.each do |key, msg|
+        %li{ :class => "flash #{key}" }= msg
+
+
+- if flash[:success] || flash[:notice]
+  #messages
+    - flash.select{|k,v| [ :success, :notice ].include?(k)}.each do |key, msg|
+      %div{ :class => "flash #{key}" }
+        = content_tag :p, msg
