@@ -20,7 +20,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'foundation-rails'
 
-group :production, :staging
+group :production, :staging do
   gem 'rails_12factor'
 end
 
