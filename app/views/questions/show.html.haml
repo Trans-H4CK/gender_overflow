@@ -17,13 +17,22 @@
       = content_tag_for(:div, answer) do
         %p
           %b User:
-          = answer.user
+          = answer.user.login if answer.user
 
         %p
           %b Answer:
           = answer.answer
+
+        - if can? :update, answer
+          %p
+            = link_to "Edit this answer", edit_question_answer_path(:question_id => @question.id, :id => answer.id )
+
   - else
     No Answers Yet
+
+- if can? :create, Answer
+  #new_answer
+    = link_to 'Add a new answer to this question!', new_question_answer_path(:question_id => @question.id)
 
 #links
   = link_to 'Edit', edit_question_path(@question) if can? :edit, @question
