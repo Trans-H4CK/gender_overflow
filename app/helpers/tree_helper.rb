@@ -11,7 +11,6 @@ module TreeHelper
     TreeLister.new(self, nodes, node_partial, list_partial).render
   end
 
-
   class TreeLister
     #Can we search for the partials once and cache that?
     def initialize(view, nodes, node_partial, list_partial)
@@ -26,7 +25,7 @@ module TreeHelper
     def pop_level
       depth = @path.length
       children = (@view.render :partial => @list_partial, :locals => {:items => @stack.pop, :depth => depth })
-      @stack.last << (@view.render :partial => @node_partial, :locals => { :node => @path.pop, :children => children, :depth => depth})
+      @stack.last << (@view.render :partial => @node_partial, :locals => { :node => @path.pop, :children => children, :depth => @path.length})
     end
 
     def render
@@ -46,6 +45,17 @@ module TreeHelper
       end
       return @view.render(:partial => @list_partial, :locals => {:items => @stack.last, :top_level => true, :depth => 0}).html_safe
     end
+  end
+
+  def depth_indicator(depth)
+    str = ''
+    if depth > 0
+      depth.times do
+        str << image_tag("icons/spacer.png", :class=> "inline", :size =>"10x12", :alt => "&nbsp;&nbsp;&nbsp;")
+      end
+      str << image_tag("icons/indent_arrow.png", :class=>"inline", :size => "12x12", :alt => '->')
+    end
+    str.html_safe
   end
 
 end
