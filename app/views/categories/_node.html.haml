@@ -5,6 +5,8 @@
       = link_to "Expand", "#", :class => "category-expand", :'data-text-show' => "Expand", :'data-text-hide' => "Collapse"
       \|
     = link_to "Show Questions", category_path(node)
+    \|
+    = link_to "Chat With Others", chats_category_path(node)
     - if can? :edit, node
       \|
       = link_to "Edit Category", edit_category_path(node)
