@@ -45,6 +45,34 @@ h1, h2, h3, h4, h5 {
 		@include grid-column(10);
 		height: 200px;
 	}
+	
+	.flash-notice {
+		background-color: #FFF79A;
+		color: #F26C4F;
+		border: 1px solid #F26C4F;
+		padding: 10px 5px;
+		margin-bottom: 15px;
+		text-align: center;
+		@include grid-column(12);
+	}
+	.flash-error {
+		background-color: #FFF79A;
+		color: #F26C4F;
+		border: 1px solid #F26C4F;
+		padding: 10px 5px;
+		margin-bottom: 15px;
+		text-align: center;
+		@include grid-column(12);
+	}
+	.flash-alert {
+		background-color: #ff7777;
+		color: #9E0B0F;
+		border: 1px solid #9E0B0F;
+		padding: 10px 5px;
+		margin-bottom: 15px;
+		text-align: center;
+		@include grid-column(12);
+	}
 }
 
 
