@@ -36,9 +36,9 @@
 // $total-columns: 12;
 
 // We use these to control various global styles
-// $body-bg: #fff;
-// $body-font-color: #222;
-// $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$body-bg: #FFF;
+$body-font-color: #071672;
+$body-font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 // $body-font-weight: normal;
 // $body-font-style: normal;
 
@@ -51,12 +51,12 @@
 // $default-float: left;
 
 // We use these as default colors throughout
-// $primary-color: #008CBA;
-// $secondary-color: #e7e7e7;
-// $alert-color: #f04124;
-// $success-color: #43AC6A;
-// $warning-color: #f08a24;
-// $info-color: #a0d3e8;
+$primary-color: #071672;
+$secondary-color: #A60000;
+$alert-color: #FFF;
+$success-color: #A60000;
+$warning-color: #071672;
+$info-color: #DDB128;
 
 // We use these to make sure border radius matches unless we want it different.
 // $global-radius: 3px;
@@ -65,7 +65,7 @@
 // We use these to control inset shadow shiny edges and depressions.
 // $shiny-edge-size: 0 1px 0;
 // $shiny-edge-color: rgba(#fff, .5);
-// $shiny-edge-active-color: rgba(#000, .2);
+$shiny-edge-active-color: rgba(#071672, .2);
 
 // Media Query Ranges
 // $small-range: (0em, 40em);
@@ -113,10 +113,10 @@
 // $include-html-type-classes: $include-html-classes;
 
 // We use these to control header font styles
-// $header-font-family: $body-font-family;
+$header-font-family: $body-font-family;
 // $header-font-weight: 300;
 // $header-font-style: normal;
-// $header-font-color: #222;
+$header-font-color: #FFF;
 // $header-line-height: 1.4;
 // $header-top-margin: .2rem;
 // $header-bottom-margin: .5rem;
@@ -220,7 +220,7 @@
 // $accordion-navigation-bg-color: #efefef  ;
 // $accordion-navigation-hover-bg-color: scale-color($accordion-navigation-bg-color, $lightness: -5%);
 // $accordion-navigation-active-bg-color: scale-color($accordion-navigation-bg-color, $lightness: -3%);
-// $accordion-navigation-font-color: #222;
+// $accordion-navigation-font-color: #071672;
 // $accordion-navigation-font-size: rem-calc(16);
 // $accordion-navigation-font-family: $body-font-family;
 
@@ -479,7 +479,7 @@
 // $form-label-font-size: rem-calc(14);
 // $form-label-font-weight: normal;
 // $form-label-line-height: 1.5;
-// $form-label-font-color: scale-color(#000, $lightness: 30%);
+$form-label-font-color: scale-color(#071672, $lightness: 30%);
 // $form-label-bottom-margin: 0;
 // $input-font-family: inherit;
 // $input-font-color: rgba(0,0,0,0.75);
@@ -593,7 +593,7 @@
 // We use these to control text styles.
 // $keystroke-font: "Consolas", "Menlo", "Courier", monospace;
 // $keystroke-font-size: rem-calc(14);
-// $keystroke-font-color: #222;
+// $keystroke-font-color: #071672;
 // $keystroke-font-color-alt: #fff;
 // $keystroke-function-factor: -7%;
 
@@ -681,7 +681,7 @@
 // Off Canvas Back-Link Overlay
 // $off-canvas-overlay-transition: background 300ms ease;
 // $off-canvas-overlay-cursor: pointer;
-// $off-canvas-overlay-box-shadow: -4px 0 4px rgba(#000, 0.5), 4px 0 4px rgba(#000, 0.5);
+$off-canvas-overlay-box-shadow: -4px 0 4px rgba(#071672, 0.5), 4px 0 4px rgba(#071672, 0.5);
 // $off-canvas-overlay-background: rgba(#FFF, 0.2);
 // $off-canvas-overlay-background-hover: rgba(#FFF, 0.05);
 
@@ -736,7 +736,7 @@
 // We use these to set the list-item properties
 // $pagination-li-float: $default-float;
 // $pagination-li-height: rem-calc(24);
-// $pagination-li-font-color: #222;
+$pagination-li-font-color: #071672;
 // $pagination-li-font-size: rem-calc(14);
 // $pagination-li-margin: rem-calc(5);
 
@@ -862,15 +862,15 @@
 // $include-html-reveal-classes: $include-html-classes;
 
 // We use these to control the style of the reveal overlay.
-// $reveal-overlay-bg: rgba(#000, .45);
-// $reveal-overlay-bg-old: #000;
+$reveal-overlay-bg: rgba(#071672, .45);
+$reveal-overlay-bg-old: #071672;
 
 // We use these to control the style of the modal itself.
 // $reveal-modal-bg: #fff;
 // $reveal-position-top: 50px;
 // $reveal-default-width: 80%;
 // $reveal-modal-padding: rem-calc(20);
-// $reveal-box-shadow: 0 0 10px rgba(#000,.4);
+$reveal-box-shadow: 0 0 10px rgba(#071672,.4);
 
 // We use these to style the reveal close button
 // $reveal-close-font-size: rem-calc(22);
@@ -1037,16 +1037,16 @@
 // $table-border-color: #ddd;
 
 // These control the table head styles
-// $table-head-bg: #f5f5f5  ;
+$table-head-bg: #f5f5f5  ;
 // $table-head-font-size: rem-calc(14);
-// $table-head-font-color: #222;
+$table-head-font-color: #071672;
 // $table-head-font-weight: bold;
 // $table-head-padding: rem-calc(8 10 10);
 
 // These control the row padding and font styles
 // $table-row-padding: rem-calc(9 10);
 // $table-row-font-size: rem-calc(14);
-// $table-row-font-color: #222;
+$table-row-font-color: #071672;
 // $table-line-height: rem-calc(18);
 
 // These are for controlling the display and margin of tables
@@ -1063,7 +1063,7 @@
 // $tabs-navigation-bg-color: #efefef  ;
 // $tabs-navigation-active-bg-color: #fff;
 // $tabs-navigation-hover-bg-color: scale-color($tabs-navigation-bg-color, $lightness: -6%);
-// $tabs-navigation-font-color: #222;
+$tabs-navigation-font-color: #071672;
 // $tabs-navigation-font-size: rem-calc(16);
 // $tabs-navigation-font-family: $body-font-family;
 
@@ -1082,7 +1082,7 @@
 // $thumb-border-style: solid;
 // $thumb-border-width: 4px;
 // $thumb-border-color: #fff;
-// $thumb-box-shadow: 0 0 0 1px rgba(#000,.2);
+$thumb-box-shadow: 0 0 0 1px rgba(#071672,.2);
 // $thumb-box-shadow-hover: 0 0 6px 1px rgba($primary-color,0.5);
 
 // Radius and transition speed for thumbs
@@ -1123,8 +1123,8 @@
 // $include-html-top-bar-classes: $include-html-classes;
 
 // Background color for the top bar
-// $topbar-bg-color: #333;
-// $topbar-bg: $topbar-bg-color;
+$topbar-bg-color: #A60000;
+$topbar-bg: $topbar-bg-color;
 
 // Height and margin
 // $topbar-height: 45px;
@@ -1135,43 +1135,43 @@
 // $topbar-title-font-size: rem-calc(17);
 
 // Style the top bar dropdown elements
-// $topbar-dropdown-bg: #333;
-// $topbar-dropdown-link-color: #fff;
-// $topbar-dropdown-link-bg: #333;
+$topbar-dropdown-bg: #071672;
+$topbar-dropdown-link-color: #fff;
+$topbar-dropdown-link-bg: #071672;
 // $topbar-dropdown-link-weight: normal;
 // $topbar-dropdown-toggle-size: 5px;
-// $topbar-dropdown-toggle-color: #fff;
+$topbar-dropdown-toggle-color: #fff;
 // $topbar-dropdown-toggle-alpha: 0.4;
 
 // Set the link colors and styles for top-level nav
 // $topbar-link-color: #fff;
-// $topbar-link-color-hover: #fff;
-// $topbar-link-color-active: #fff;
-// $topbar-link-color-active-hover: #fff;
+$topbar-link-color-hover: #fff;
+$topbar-link-color-active: #fff;
+$topbar-link-color-active-hover: #fff;
 // $topbar-link-weight: normal;
 // $topbar-link-font-size: rem-calc(13);
-// $topbar-link-hover-lightness: -10%; // Darken by 10%
-// $topbar-link-bg-hover: #272727  ;
-// $topbar-link-bg-active: $primary-color;
+$topbar-link-hover-lightness: -10%; // Darken by 10%
+$topbar-link-bg-hover: #BF3030;
+$topbar-link-bg-active: $primary-color;
 // $topbar-link-bg-active-hover: scale-color($primary-color, $lightness: -14%);
-// $topbar-link-font-family: $body-font-family;
+$topbar-link-font-family: $body-font-family;
 
 // $topbar-button-font-size: 0.75rem;
 
-// $topbar-dropdown-label-color: #777;
+$topbar-dropdown-label-color: #FFF;
 // $topbar-dropdown-label-text-transform: uppercase;
 // $topbar-dropdown-label-font-weight: bold;
 // $topbar-dropdown-label-font-size: rem-calc(10);
-// $topbar-dropdown-label-bg: #333;
+$topbar-dropdown-label-bg: #071672;
 
 // Top menu icon styles
 // $topbar-menu-link-transform: uppercase;
 // $topbar-menu-link-font-size: rem-calc(13);
 // $topbar-menu-link-weight: bold;
-// $topbar-menu-link-color: #fff;
-// $topbar-menu-icon-color: #fff;
-// $topbar-menu-link-color-toggled: #888;
-// $topbar-menu-icon-color-toggled: #888;
+$topbar-menu-link-color: #FFF;
+$topbar-menu-icon-color: #fff;
+$topbar-menu-link-color-toggled: #888;
+$topbar-menu-icon-color-toggled: #888;
 
 // Transitions and breakpoint styles
 // $topbar-transition-speed: 300ms;
