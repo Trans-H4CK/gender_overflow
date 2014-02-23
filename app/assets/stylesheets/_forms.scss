@@ -5,6 +5,23 @@ form {
 
 input[type='submit'] {
   @extend .button;
+  float: right;
+  background-color: #777EA9;
+}
+
+input[type='submit']:hover {
+	background-color: #061362;
+}
+
+.actions a {
+  @extend .button;
+  background-color: #ffffff;
+  color: #061362;
+  float: left;
+}
+
+.actions a:hover {
+  background-color: #61699B;
 }
 
 .form_section {
@@ -30,7 +47,9 @@ input[type='submit'] {
     @include grid-column(2);
     text-align: right;
     position: relative;
-    top: $form-spacing / 2;
+    top: 0px;
+	color: #444444;
+	font-size: 1.3em;
   }
   textarea, select, #{$all_input_types} {
     @include grid-column(7);

@@ -1,5 +1,9 @@
-- set_headline "New question"
+- set_headline "Create a New Question"
 
-= render 'form'
-
-= link_to 'Back', questions_path
+%div{:class => "col12"}
+  %div{:class => "col1"}
+    &nbsp;
+  %div{:class => "col9"}
+    = render 'form'
+  %div{:class => "col1"}
+    &nbsp;

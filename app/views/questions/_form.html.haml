@@ -12,5 +12,9 @@
   .field
     = f.label :category_id, "Category"
     = category_selector(f)
-  .actions
-    = f.submit 'Save'
+  %div{:class => "col12 buffer-top50"}
+    %div{:class => "col2"} &nbsp;
+    %div{:class => "col10"}
+      .actions
+        = link_to 'Back', questions_path
+        = f.submit 'Save'

@@ -38,6 +38,13 @@ h1, h2, h3, h4, h5 {
 		text-decoration: underline;
 	}
 	
+	.field label {
+		@include grid-column(2);
+	}
+	.field textarea {
+		@include grid-column(10);
+		height: 200px;
+	}
 }
 
 
