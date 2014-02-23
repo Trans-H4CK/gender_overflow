@@ -1,21 +1,19 @@
 - set_headline "Questions from the Community"
 
-%div{:class => "content-tile"}
+%p
+  &nbsp;&nbsp;&nbsp;Kick in here with your questions, answer to help others, or just surf the wisdom of others.<br>
+  &nbsp;&nbsp;&nbsp;Please stay focused on trans issues - medical, legal, social, political.<br>
+  &nbsp;&nbsp;&nbsp;Keep it clean and don't get mean.  Let's care for each other.
 
-  %p
-    &nbsp;&nbsp;&nbsp;Kick in here with your questions, answer to help others, or just surf the wisdom of others.<br>
-    &nbsp;&nbsp;&nbsp;Please stay focused on trans issues - medical, legal, social, political.<br>
-    &nbsp;&nbsp;&nbsp;Keep it clean and don't get mean.  Let's care for each other.
+%table
+  - @questions.each do |question|
+    %tr
+      %td= question.question
+      %td= question.user.login if question.user
+      %td= link_to 'Show', question
+      %td= link_to 'Edit', edit_question_path(question) if can? :edit, question
+      %td= link_to 'Destroy', question, :method => :delete, :data => { :confirm => 'Are you sure?' } if can? :destroy, question
 
-  %table
-    - @questions.each do |question|
-      %tr
-        %td= question.question
-        %td= question.user.login if question.user
-        %td= link_to 'Show', question
-        %td= link_to 'Edit', edit_question_path(question) if can? :edit, question
-        %td= link_to 'Destroy', question, :method => :delete, :data => { :confirm => 'Are you sure?' } if can? :destroy, question
+%br
 
-  %br
-
-  = link_to 'New Question', new_question_path
+= link_to 'New Question', new_question_path

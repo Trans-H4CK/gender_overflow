@@ -11,7 +11,7 @@ body {
 h1, h2, h3, h4, h5 {
 	color: #444444;
 }
-.content-tile {
+#main {
 	@include grid-row;
 
 	  margin: 20px 0px;
@@ -20,31 +20,31 @@ h1, h2, h3, h4, h5 {
 	  -webkit-border-radius: 10px;
 	  -moz-border-radius: 10px;
 	  border-radius: 10px;
-	  
+
 	  background-color: #efefef;
-}	
+}
 
 
 .content-row {
-	
+
   @include grid-row;
   text-align: center;
   color: #071672;
-  
+
   h1.header {
 	  margin: 0px auto 10px;
   }
-  
+
   h3.tagline {
-	  margin: 0px auto 40px;	
+	  margin: 0px auto 40px;
 	  /*color: #071672;*/
-	  color: #444444;  
+	  color: #444444;
   }
-  
+
   iframe.youtube-media {
 	  width: 100%;
   }
-  
+
 }
 
 .col1 {
