@@ -1,0 +1,94 @@
+form {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+input[type='submit'] {
+  @extend .button;
+}
+
+.form_section {
+  clear: both;
+  margin-top: 1em;
+  border: 1px solid #aaaaaa;
+  background: #e9e9f0;
+  padding: 0 0 1em 0;
+  h3 {
+    margin-top: 0.25em;
+    padding-left: 1em;
+    border-bottom: 1px solid #aaaaaa;
+  }
+}
+
+.form_section:after {
+  @include clearfix;
+}
+
+.field {
+  @include grid-row;
+  label {
+    @include grid-column(2);
+    text-align: right;
+    position: relative;
+    top: $form-spacing / 2;
+  }
+  textarea, select, #{$all_input_types} {
+    @include grid-column(7);
+  }
+  .comment {
+    @include grid-column(3);
+    font-style: italic;
+  }
+}
+
+.required label {
+  font-weight: bold;
+}
+
+.error_explanation, .errorExplanation, #error_explanation, #errorExplanation {
+  @include alert;
+  @include radius($alert-radius);
+  @include alert-style($alert-color);
+  ul {
+    list-style-position: inside;
+  }
+  a.close {
+    @include alert-close;
+  }
+  h2 {
+    font-family: $body_font_family;
+    color: $alert_font_color;
+  }
+}
+
+.error_explanation, .errorExplanation, #error_explanation, #errorExplanation {
+  ul {
+    list-style-position: inside;
+  }
+  a.close {
+    @include alert-close;
+  }
+  h2 {
+    font-family: $body_font_family;
+    color: $alert_font_color;
+  }
+}
+
+.field_with_errors, .fieldWithErrors {
+  display: inline;
+  label {
+    color: red;
+  }
+  input, textarea {
+    background-color: $error_background;
+  }
+}
+
+.tab.selected {
+  font-weight: bold;
+  a {
+    cursor: default;
+    color: inherit;
+  }
+}
+

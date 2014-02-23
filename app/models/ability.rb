@@ -13,6 +13,7 @@ class Ability
         can :manage, User, :id => user.id
       end
     end
+    can :read, Category
     can :read, Question
     can :read, Answer
   end
