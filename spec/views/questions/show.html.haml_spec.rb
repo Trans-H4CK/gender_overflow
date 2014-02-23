@@ -2,18 +2,14 @@ require 'spec_helper'
 
 describe "questions/show" do
   before(:each) do
-    @question = assign(:question, stub_model(Question,
-      :question => "MyText",
-      :category => nil,
-      :user => nil
-    ))
+    @question = stub_model(Question) do |q|
+      q.question = "MyText"
+      q.category = nil
+    end
+    assign(:question, @question)
   end
 
-  it "renders attributes in <p>" do
+  it "renders the edit question form" do
     render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/MyText/)
-    rendered.should match(//)
-    rendered.should match(//)
   end
 end
