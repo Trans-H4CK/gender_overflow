@@ -10,7 +10,7 @@
     = f.label :question
     = f.text_area :question
   .field
-    = f.label :category
-    = f.text_field :category
+    = f.label :category_id, "Category"
+    = category_selector(f)
   .actions
     = f.submit 'Save'
