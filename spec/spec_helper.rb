@@ -74,7 +74,7 @@ RSpec.configure do |config|
   end
 
   config.before :suite do
-    DatabaseCleaner.clean_with :truncation, {:except => %w[spatial_ref_sys]}
+    DatabaseCleaner.clean_with :truncation
     load 'db/seeds.rb'
   end
 

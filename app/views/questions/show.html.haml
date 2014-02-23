@@ -13,7 +13,7 @@
   %h3 Answers:
 
   - if @question.answers.present?
-    - @question.answers.each do |answer|
+    - @question.answers.by_vote_count.each do |answer|
       = content_tag_for(:div, answer) do
         %p
           %b User:
@@ -22,6 +22,10 @@
         %p
           %b Answer:
           = answer.answer
+
+        %p
+          %b Vote:
+          = answer.votes
 
         - if can? :update, answer
           %p
