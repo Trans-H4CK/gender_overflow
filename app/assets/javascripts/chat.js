@@ -52,13 +52,41 @@ $(function() {
     $name.on('keydown blur', handleName);
   });
 
+  function formatDate (date) {
+
+	  var dateString = date?new Date(date):"";
+	  var dateFormatted = "";
+
+	  if (dateString == "") return "";
+	  
+	  var dd = dateString.getDate();
+	  var mm = dateString.getMonth()+1;
+	  var yyyy = dateString.getFullYear();
+	  var hrs = dateString.getHours();
+	  var mins = dateString.getMinutes();
+	  	  
+	  mins = mins + (mins < 10 ? "0":"") + (hrs> 11 ? " PM":" AM");
+	  hrs = (hrs == 0)?12:(hrs < 13)?hrs:hrs-12;
+	  
+	  dateFormatted = mm + "/" + dd + "/" + yyyy + " " + hrs + ":" + mins; 
+	  
+	  return dateFormatted;
+  }
+  
   function addMessage(message) {
     //var $message = $('<li><div class="user-name"></div><div class="user-message"></div></li>');
-	var $message = $('<tr><td class="user-name"></td><td class="user-message"></td></tr>');
+	var $message = $('<tr><td><span class=\"user-name\"></span><br /></td><td><span class=\"submitted-on\"></span><span class="user-message"></span></td></tr>');
+	var submissionDate = formatDate(message.submittedOn)
+	
     $message.addClass('message');
 
-    $message.children().first().text(message.name);
-    $message.children().last().text(message.text);
+    $message.children().first().children().first().text(message.name);
+	
+	if (submissionDate !== "") {
+	    $message.children().eq(1).children().first().text(submissionDate);
+    }
+	
+    $message.children().eq(1).children().eq(1).text(message.text);
 
     $messages.append($message);
 	console.log(message);
@@ -73,7 +101,8 @@ $(function() {
 
     var message = {
       name: $name.val(),
-      text: $text.val()
+      text: $text.val(),
+	  submittedOn: new Date()
     };
 
     if (message.name === '' || message.text === '') {

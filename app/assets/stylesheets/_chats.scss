@@ -14,3 +14,35 @@ body.chats .chat-video .flex-video {
 .messages-wrapper th {
 	text-align: center;
 }
+
+body.chats .tranzlove-bg-img {
+    /* IE 8 */
+     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+
+     /* IE 5-7 */
+     filter: alpha(opacity=50);
+
+     /* Netscape */
+     -moz-opacity: 0.5;
+
+     /* Safari 1.x */
+     -khtml-opacity: 0.5;
+
+     /* Good browsers */
+     opacity: 0.5;
+	 
+	 margin-top: 25px;
+}	 
+
+body.chats span.user-name {
+	font-weight: 700;
+	font-size: 1.15em;
+	width:100%;
+	text-align:left;
+}
+
+body.chats span.submitted-on {
+	text-align:right;
+	font-size: 0.8em;
+	@include grid-column(12);
+}
