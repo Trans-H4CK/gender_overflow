@@ -3,7 +3,7 @@
 #question
   %p
     %b Category:
-    = @question.category.name
+    = @question.category.name if @question.category
 
   %p
     %b User:
