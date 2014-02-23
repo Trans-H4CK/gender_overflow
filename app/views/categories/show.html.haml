@@ -1,0 +1,5 @@
+- set_headline @category.name
+
+#questions
+  %h3 Questions
+  = render :partial => "questions/list", locals: { questions: @category.all_questions }
