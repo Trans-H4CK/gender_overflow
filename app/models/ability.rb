@@ -10,6 +10,7 @@ class Ability
         can :update, Question, :user_id => user.id
         can :create, Answer
         can :update, Answer, :user_id => user.id
+        can :vote, Answer
         can :manage, User, :id => user.id
         can :chat, Category
       end

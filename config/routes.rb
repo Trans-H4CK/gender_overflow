@@ -9,7 +9,14 @@ GenderOverflow::Application.routes.draw do
   end
 
   resources :questions do
-    resources :answers, :only => [:new, :edit, :create, :update, :destroy]
+    resources :answers, :only => [:new, :edit, :create, :update, :destroy] do
+      member do
+        post :'up-vote', :action => "up_vote"
+        post :'down-vote', :action => "down_vote"
+        put :'switch-vote', :action => "switch_vote"
+        delete :'delete-vote', :action => 'delete_vote'
+      end
+    end
   end
 
   resources :categories

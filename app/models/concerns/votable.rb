@@ -50,6 +50,13 @@ module Votable
     save
   end
 
+  def delete_vote(user)
+    vote = my_vote(user)
+    if vote
+      vote.destroy
+    end
+  end
+
   module ClassMethods
     def by_vote_count
       all.sort_by{|answer| -answer.votes}

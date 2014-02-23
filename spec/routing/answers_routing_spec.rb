@@ -41,5 +41,37 @@ describe AnswersController do
         :id => '2')
     end
 
+    it "routes to #up_vote" do
+      post("/questions/1/answers/2/up-vote").should route_to(
+        :controller => "answers",
+        :action => "up_vote",
+        :question_id => '1',
+        :id => '2')
+    end
+
+    it "routes to #down_vote" do
+      post("/questions/1/answers/2/down-vote").should route_to(
+        :controller => "answers",
+        :action => "down_vote",
+        :question_id => '1',
+        :id => '2')
+    end
+
+    it "routes to #switch_vote" do
+      put("/questions/1/answers/2/switch-vote").should route_to(
+        :controller => "answers",
+        :action => "switch_vote",
+        :question_id => '1',
+        :id => '2')
+    end
+
+    it "routes to #delete_vote" do
+      delete("/questions/1/answers/2/delete-vote").should route_to(
+        :controller => "answers",
+        :action => "delete_vote",
+        :question_id => '1',
+        :id => '2')
+    end
+
   end
 end

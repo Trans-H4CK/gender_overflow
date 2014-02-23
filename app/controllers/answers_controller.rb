@@ -1,8 +1,8 @@
 class AnswersController < ApplicationController
   before_filter :load_question
   before_filter :create_answer, :only => :create
-  load_and_authorize_resource
-
+  load_and_authorize_resource :except => [:up_vote, :down_vote, :switch_vote, :delete_vote]
+  before_filter :load_answer_and_authorize_vote, :only => [:up_vote, :down_vote, :switch_vote, :delete_vote]
   # GET /questions/new
   def new
     @answer.user = current_user
@@ -37,6 +37,34 @@ class AnswersController < ApplicationController
     redirect_to @question, notice: 'Answer was successfully destroyed.'
   end
 
+  def up_vote
+    if @answer.up_vote(current_user)
+      redirect_to @question, notice: 'Answer was up voted!'
+    else
+      flash[:error] = @answer.errors.full_messages.join(", ")
+      redirect_to @question
+    end
+  end
+
+  def down_vote
+    if @answer.down_vote(current_user)
+      redirect_to @question, notice: 'Answer was down voted!'
+    else
+      flash[:error] = @answer.errors.full_messages.join(", ")
+      redirect_to @question
+    end
+  end
+
+  def switch_vote
+    @answer.switch_vote(current_user)
+    redirect_to @question, notice: 'Your vote was switched!'
+  end
+
+  def delete_vote
+    @answer.delete_vote(current_user)
+    redirect_to @question, notice: 'Vote removed!'
+  end
+
   private
 
     def load_question
@@ -53,4 +81,10 @@ class AnswersController < ApplicationController
     def answer_params
       params.require(:answer).permit(:answer, :question_id, :user_id)
     end
+
+    def load_answer_and_authorize_vote
+      @answer = Answer.find(params[:id])
+      authorize! :vote, @answer
+    end
+
 end

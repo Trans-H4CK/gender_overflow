@@ -238,7 +238,7 @@ describe AnswersController do
       Answer.should_receive(:find).with('1').and_return(answer)
     end
 
-    context 'authorized' do
+    context 'note authorized' do
       before do
         should_not_authorize(:destroy, answer)
         delete :destroy, :question_id => question, :id => answer.id
@@ -265,16 +265,149 @@ describe AnswersController do
       end
     end
 
-    context 'authorized' do
+  end
+
+  describe 'voting' do
+    let :answer do
+      mock_model(Answer).tap do |q|
+        q.stub(:id) { 1 }
+      end
+    end
+
+    before do
+      Answer.should_receive(:find).with('1').and_return(answer)
+    end
+
+    describe 'not authorized' do
       before do
-        should_not_authorize(:destroy, answer)
-        delete :destroy, :question_id => question, :id => answer.id
+        should_not_authorize(:vote, answer)
       end
 
-      it "should let you know answer was deleted" do
+      it "up vote" do
+        post :up_vote, :question_id => question, :id => answer.id
+        verify_authorization_unsuccessful
+      end
+
+      it "down vote" do
+        post :down_vote, :question_id => question, :id => answer.id
+        verify_authorization_unsuccessful
+      end
+
+      it "switch vote" do
+        put :switch_vote, :question_id => question, :id => answer.id
+        verify_authorization_unsuccessful
+      end
+
+      it "delete vote" do
+        delete :delete_vote, :question_id => question, :id => answer.id
         verify_authorization_unsuccessful
       end
     end
-  end
 
+    context 'authorized' do
+      before do
+        should_authorize(:vote, answer)
+      end
+
+      context 'up_vote' do
+        context 'success' do
+          before do
+            answer.should_receive(:up_vote).and_return(true)
+            post :up_vote, :question_id => question, :id => answer.id
+          end
+
+          it "should let you know answer was deleted" do
+            flash[:notice] == 'Answer was up voted!'
+          end
+
+          it "should return to the index" do
+            response.should redirect_to question_path(question)
+          end
+        end
+
+        context 'failure' do
+          before do
+            answer.should_receive(:up_vote).and_return(false)
+            answer.stub_chain(:errors, :full_messages) { ["Failure"] }
+            post :up_vote, :question_id => question, :id => answer.id
+          end
+
+          it "should let you know failure" do
+            flash[:error].should == 'Failure'
+          end
+
+          it "should return to the index" do
+            response.should redirect_to question_path(question)
+          end
+        end
+      end
+
+      context 'down_vote' do
+        context 'success' do
+          before do
+            answer.should_receive(:down_vote).and_return(true)
+            post :down_vote, :question_id => question, :id => answer.id
+          end
+
+          it "should let you know answer was deleted" do
+            flash[:notice] == 'Answer was down voted!'
+          end
+
+          it "should return to the index" do
+            response.should redirect_to question_path(question)
+          end
+        end
+
+        context 'failure' do
+          before do
+            answer.should_receive(:down_vote).and_return(false)
+            answer.stub_chain(:errors, :full_messages) { ["Failure"]}
+            post :down_vote, :question_id => question, :id => answer.id
+          end
+
+          it "should let you know failure" do
+            flash[:error].should == 'Failure'
+          end
+
+          it "should return to the index" do
+            response.should redirect_to question_path(question)
+          end
+        end
+      end
+
+      context 'switch_vote' do
+        context 'success' do
+          before do
+            answer.should_receive(:switch_vote).and_return(true)
+            put :switch_vote, :question_id => question, :id => answer.id
+          end
+
+          it "should let you know answer was deleted" do
+            flash[:notice] == 'Your vote was switched!'
+          end
+
+          it "should return to the index" do
+            response.should redirect_to question_path(question)
+          end
+        end
+      end
+
+      context 'delete_vote' do
+        context 'success' do
+          before do
+            answer.should_receive(:delete_vote).and_return(true)
+            delete :delete_vote, :question_id => question, :id => answer.id
+          end
+
+          it "should let you know answer was deleted" do
+            flash[:notice] == 'Vote removed!'
+          end
+
+          it "should return to the index" do
+            response.should redirect_to question_path(question)
+          end
+        end
+      end
+    end
+  end
 end
