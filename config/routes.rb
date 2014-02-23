@@ -8,7 +8,9 @@ GenderOverflow::Application.routes.draw do
     get "/reset_password" => "devise/passwords#new", :as => :reset_password
   end
 
-  resources :questions
+  resources :questions do
+    resources :answers, :only => [:new, :edit, :create, :update, :destroy]
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

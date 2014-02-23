@@ -1,13 +1,31 @@
-%p
-  %b Question:
-  = @question.question
-%p
-  %b Category:
-  = @question.category
-%p
-  %b User:
-  = @question.user
+- set_headline "Question: #{@question.question}"
 
-= link_to 'Edit', edit_question_path(@question)
-\|
-= link_to 'Back', questions_path
+#question
+  %p
+    %b Category:
+    = @question.category
+
+  %p
+    %b User:
+    = @question.user
+
+#answers
+  %h3 Answers:
+
+  - if @question.answers.present?
+    - @question.answers.each do |answer|
+      = content_tag_for(:div, answer) do
+        %p
+          %b User:
+          = answer.user
+
+        %p
+          %b Answer:
+          = answer.answer
+  - else
+    No Answers Yet
+
+#links
+  = link_to 'Edit', edit_question_path(@question) if can? :edit, @question
+  \|
+  = link_to 'Back', questions_path
