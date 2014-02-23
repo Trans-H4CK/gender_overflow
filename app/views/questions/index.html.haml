@@ -3,7 +3,6 @@
 %table
   %tr
     %th Question
-    %th Category
     %th User
     %th
     %th
@@ -12,8 +11,7 @@
   - @questions.each do |question|
     %tr
       %td= question.question
-      %td= question.category
-      %td= question.user
+      %td= question.user.login if question.user
       %td= link_to 'Show', question
       %td= link_to 'Edit', edit_question_path(question) #if can? :edit, question
       %td= link_to 'Destroy', question, :method => :delete, :data => { :confirm => 'Are you sure?' } if can? :destroy, question
