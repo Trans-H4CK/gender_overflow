@@ -14,6 +14,9 @@ GenderOverflow::Application.routes.draw do
 
   resources :categories
 
+  namespace :chats do
+    resources :categories, :only => [:show]
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
