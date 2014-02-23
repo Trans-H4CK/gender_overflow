@@ -14,7 +14,7 @@
     <%= csrf_meta_tags %>
   </head>
 
-  <body>
+  <body class="<%= body_class.join(" ") %>">
     <div id="header">
       <%= render :partial => 'layouts/nav' %>
     </div>

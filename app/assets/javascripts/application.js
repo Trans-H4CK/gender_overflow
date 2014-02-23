@@ -12,6 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require common/ninjascript
+//= require_tree ./ninjascripts/
+//= require ninja-go
 //= require foundation
 //= require_tree .
 

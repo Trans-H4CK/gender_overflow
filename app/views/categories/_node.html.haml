@@ -6,6 +6,6 @@
       %h5= node.name
   - else
     %h3= node.name
-  = link_to "Expand", "#"
+  = link_to "Expand", "#", :class => "category-expand"
   - if defined? children
     = children
