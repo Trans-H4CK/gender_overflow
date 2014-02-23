@@ -47,9 +47,13 @@ h1, h2, h3, h4, h5 {
 	color: #444444;
 	background-color: #efefef;
 
+	/*
 	.question-row:hover .question-text {
 		font-weight: 700 !important;
+		color: #000 !important;
 	}
+		*/
+	
 	.action-link:hover {
 		text-decoration: underline;
 	}
@@ -90,6 +94,14 @@ h1, h2, h3, h4, h5 {
 		@include grid-column(12);
 	}
 }
+
+body.questions {
+	table tr:nth-child(odd):hover{
+		background-color: #efefef !important;
+	}
+	table tr:nth-child(even):hover{
+		background-color: #eeeeee !important;
+	}
 
 
 .content-row {
