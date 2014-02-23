@@ -2,12 +2,46 @@
   @include grid-row;
 }
 
-.content-row h1 { color: #071672; }
+body {
+	background-color: #777;
+}
+
+
+	.content-tile {
+		@include grid-row;
+
+		  margin: 20px 0px;
+		  padding: 50px 15px;
+		  border: 1px solid #444444;
+		  border-radius: 10px;
+		  
+		  background-color: #efefef;
+	}	
 
 
 .content-row {
+	
   @include grid-row;
+  text-align: center;
+  color: #071672;
+  
+  h1.header {
+	  margin: 0px auto 10px;
+	  color: #444444;
+  }
+  
+  h3.tagline {
+	  margin: 0px auto 40px;	
+	  /*color: #071672;*/
+	  color: #444444;  
+  }
+  
+  iframe.youtube-media {
+	  width: 100%;
+  }
+  
 }
+
 .col1 {
 	@include grid-column(1);
 }
@@ -43,11 +77,4 @@
 }
 .col12 {
 	@include grid-column(12);
-}
-
-iframe.youtube-media {
-	width: 100%;
-}
-div.youtube-media {
-	height: 20%;
 }
