@@ -11,7 +11,7 @@ body {
 h1, h2, h3, h4, h5 {
 	color: #444444;
 }
-#main {
+#content_body {
 	@include grid-row;
 
 	  margin: 20px 0px;

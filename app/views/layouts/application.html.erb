@@ -24,10 +24,12 @@
         <h1><%= yield :headline %></h1>
       <% end %>
 
-      <%= render :partial => 'layouts/flash' , :locals => { :flash => flash } %>
+      <div id="content_body">
+        <%= render :partial => 'layouts/flash' , :locals => { :flash => flash } %>
 
-      <div id="main">
-        <%= yield %>
+        <div id="main">
+          <%= yield %>
+        </div>
       </div>
     </div>
 
