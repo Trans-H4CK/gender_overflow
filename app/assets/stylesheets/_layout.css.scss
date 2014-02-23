@@ -21,14 +21,23 @@ h1, h2, h3, h4, h5 {
 #content_body {
 	@include grid-row;
 
-	  margin: 20px 0px;
-	  padding: 50px 15px;
-	  border: 1px solid #444444;
-	  -webkit-border-radius: 10px;
-	  -moz-border-radius: 10px;
-	  border-radius: 10px;
-
-	  background-color: #efefef;
+	margin: 20px 0px;
+	padding: 50px 15px;
+	border: 1px solid #444444;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	  
+	color: #444444;
+	background-color: #efefef;
+	
+	.question-row:hover .question-text {
+		font-weight: 700 !important;
+	}
+	.action-link:hover {
+		text-decoration: underline;
+	}
+	
 }
 
 
@@ -89,4 +98,24 @@ h1, h2, h3, h4, h5 {
 }
 .col12 {
 	@include grid-column(12);
+}
+
+.text-right {
+	text-align:right !important;
+}
+.text-left {
+	text-align:left !important;
+}
+.text-center {
+	text-align:left !important;
+}
+
+.buffer-top50 {
+	margin-top: 50px;
+}
+.buffer-top75 {
+	margin-top: 75px;
+}
+.buffer-top100 {
+	margin-top: 100px;
 }

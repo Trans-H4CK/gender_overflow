@@ -1,7 +1,7 @@
-%table
+%table{:class => 'col12'}
   - questions.each do |question|
-    %tr
-      %td= link_to question.question, question
-      %td= question.user.login if question.user
-      %td= link_to 'Edit', edit_question_path(question) if can? :edit, question
-      %td= link_to 'Destroy', question, :method => :delete, :data => { :confirm => 'Are you sure?' } if can? :destroy, question
+    %tr{:class => 'question-row'}
+      %td{:class => 'question-text col10 text-left'}= link_to question.question, question
+      %td{:class => 'col2 question-actions'}
+        = link_to 'Edit', edit_question_path(question), :class => "action-link" if can? :edit, question
+        = link_to 'Destroy', question, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "action-link" if can? :destroy, question
