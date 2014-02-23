@@ -37,7 +37,9 @@ module Votable
   end
 
   def my_vote(user)
-    Vote.where(:user_id => user.id, :votable_id => id, :votable_type => self.class.to_s).first
+    if user
+      Vote.where(:user_id => user.id, :votable_id => id, :votable_type => self.class.to_s).first
+    end
   end
 
   def up_vote(user)
