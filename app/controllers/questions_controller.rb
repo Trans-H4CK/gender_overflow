@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  before_filter :create_question, :only => :create
   load_and_authorize_resource
 
   # GET /questions
@@ -11,6 +12,7 @@ class QuestionsController < ApplicationController
 
   # GET /questions/new
   def new
+    @question.user = current_user
   end
 
   # GET /questions/1/edit
@@ -42,6 +44,11 @@ class QuestionsController < ApplicationController
   end
 
   private
+
+    def create_question
+      @question = Question.new(question_params)
+      @question.user = current_user
+    end
 
     # Only allow a trusted parameter "white list" through.
     def question_params

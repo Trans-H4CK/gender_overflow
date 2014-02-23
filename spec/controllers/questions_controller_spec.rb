@@ -20,140 +20,275 @@ require 'spec_helper'
 
 describe QuestionsController do
 
-  # This should return the minimal set of attributes required to create a valid
-  # Question. As you add validations to Question, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) { { "question" => "MyText" } }
-
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # QuestionsController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
-
   describe "GET index" do
+    before do
+      @question = mock(Question)
+      Question.should_receive(:accessible_by).and_return([@question])
+      should_authorize(:index, Question)
+    end
+
     it "assigns all questions as @questions" do
-      question = Question.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:questions).should eq([question])
+      get :index
+      assigns(:questions).should eq([@question])
     end
   end
 
   describe "GET show" do
+    before do
+      @question = mock_model(Question) do |q|
+        q.stub(:id) { '1' }
+      end
+      should_authorize(:show, @question)
+      Question.should_receive(:find).with('1').and_return(@question)
+    end
+
     it "assigns the requested question as @question" do
-      question = Question.create! valid_attributes
-      get :show, {:id => question.to_param}, valid_session
-      assigns(:question).should eq(question)
+      get :show, :id => @question.id
+      assigns(:question).should eq(@question)
     end
   end
 
   describe "GET new" do
-    it "assigns a new question as @question" do
-      get :new, {}, valid_session
-      assigns(:question).should be_a_new(Question)
+    before do
+      @question = mock_model(Question)
+      Question.should_receive(:new).and_return(@question)
+    end
+
+    context 'not authorized' do
+      before do
+        should_not_authorize(:new, @question)
+      end
+
+      it "should not be authorized" do
+        get :new
+        verify_authorization_unsuccessful
+      end
+    end
+
+    context 'authorized' do
+      before do
+        @question.should_receive(:user=)
+        should_authorize(:new, @question)
+      end
+
+      it "assigns a new question as @question" do
+        get :new
+        assigns(:question).should == @question
+      end
     end
   end
 
   describe "GET edit" do
-    it "assigns the requested question as @question" do
-      question = Question.create! valid_attributes
-      get :edit, {:id => question.to_param}, valid_session
-      assigns(:question).should eq(question)
+    before do
+      @question = mock(Question).tap do |q|
+        q.stub(:id) { 1 }
+      end
+      Question.should_receive(:find).with('1').and_return(@question)
+    end
+
+    context 'not authorized' do
+      before do
+        should_not_authorize(:edit, @question)
+      end
+
+      it "should not be authorized" do
+        get :edit, :id => @question.id
+        verify_authorization_unsuccessful
+      end
+    end
+
+    context 'authorized' do
+      before do
+        should_authorize(:edit, @question)
+      end
+
+      it "assigns given question as @question" do
+        get :edit, :id => @question.id
+        assigns(:question).should == @question
+      end
     end
   end
 
   describe "POST create" do
-    describe "with valid params" do
-      it "creates a new Question" do
-        expect {
-          post :create, {:question => valid_attributes}, valid_session
-        }.to change(Question, :count).by(1)
+    let :params do
+      {
+      :question => "What's up?"
+      }
+    end
+
+    before do
+      question.should_receive(:user=)
+      Question.should_receive(:new).with(params.with_indifferent_access).and_return(question)
+    end
+
+    context 'authorized' do
+      before do
+        should_authorize(:create, question)
+        post :create, :question => params
       end
 
-      it "assigns a newly created question as @question" do
-        post :create, {:question => valid_attributes}, valid_session
-        assigns(:question).should be_a(Question)
-        assigns(:question).should be_persisted
+      context "with valid params" do
+
+        let :question do
+          mock_model(Question).tap do |q|
+            q.stub(:save) { true }
+            q.stub(:id) { 1 }
+          end
+        end
+
+        it "should notify success on create" do
+          flash[:notice].should == 'Question was successfully created.'
+        end
+
+        it "redirects to the created question" do
+          response.should redirect_to(question_path(1))
+        end
       end
 
-      it "redirects to the created question" do
-        post :create, {:question => valid_attributes}, valid_session
-        response.should redirect_to(Question.last)
+      describe "with invalid params" do
+
+        let :question do
+          mock_model(Question).tap do |q|
+            q.stub(:save) { false }
+          end
+        end
+
+        it "redirects to the created question" do
+          response.should render_template(:new)
+        end
       end
     end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved question as @question" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Question.any_instance.stub(:save).and_return(false)
-        post :create, {:question => { "question" => "invalid value" }}, valid_session
-        assigns(:question).should be_a_new(Question)
+    context "not authorized" do
+      before do
+        should_not_authorize(:create, question)
+        post :create, :question => params
       end
 
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Question.any_instance.stub(:save).and_return(false)
-        post :create, {:question => { "question" => "invalid value" }}, valid_session
-        response.should render_template("new")
+      let :question do
+        mock_model(Question)
+      end
+
+      it "should notify success on create" do
+        verify_authorization_unsuccessful
       end
     end
   end
 
   describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested question" do
-        question = Question.create! valid_attributes
-        # Assuming there are no other questions in the database, this
-        # specifies that the Question created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Question.any_instance.should_receive(:update).with({ "question" => "MyText" })
-        put :update, {:id => question.to_param, :question => { "question" => "MyText" }}, valid_session
+    let :params do
+      {
+      :question => "What's up?"
+      }
+    end
+
+    before do
+      Question.should_receive(:find).with('1').and_return(question)
+    end
+
+    context 'authorized' do
+      before do
+        should_authorize(:update, question)
+        put :update, :id => question.id, :question => params
       end
 
-      it "assigns the requested question as @question" do
-        question = Question.create! valid_attributes
-        put :update, {:id => question.to_param, :question => valid_attributes}, valid_session
-        assigns(:question).should eq(question)
+      describe "with valid params" do
+        let :question do
+          mock_model(Question).tap do |q|
+            q.stub(:id) { 1 }
+            q.stub(:update) { true }
+          end
+        end
+
+        it "should notify success on create" do
+          flash[:notice].should == 'Question was successfully updated.'
+        end
+
+        it "redirects to the created question" do
+          response.should redirect_to(question_path(1))
+        end
       end
 
-      it "redirects to the question" do
-        question = Question.create! valid_attributes
-        put :update, {:id => question.to_param, :question => valid_attributes}, valid_session
-        response.should redirect_to(question)
+      describe "with invalid params" do
+        let :question do
+          mock_model(Question).tap do |q|
+            q.stub(:id) { 1 }
+            q.stub(:update) { false }
+          end
+        end
+
+        it "redirects to the created question" do
+          response.should render_template(:edit)
+        end
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the question as @question" do
-        question = Question.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Question.any_instance.stub(:save).and_return(false)
-        put :update, {:id => question.to_param, :question => { "question" => "invalid value" }}, valid_session
-        assigns(:question).should eq(question)
+    context "not authorized" do
+      before do
+        should_not_authorize(:update, question)
+        put :update, :id => question.id, :question => params
       end
 
-      it "re-renders the 'edit' template" do
-        question = Question.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Question.any_instance.stub(:save).and_return(false)
-        put :update, {:id => question.to_param, :question => { "question" => "invalid value" }}, valid_session
-        response.should render_template("edit")
+      let :question do
+        mock_model(Question).tap do |q|
+          q.stub(:id) { 1 }
+        end
+      end
+
+      it "should notify success on create" do
+        verify_authorization_unsuccessful
       end
     end
+
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested question" do
-      question = Question.create! valid_attributes
-      expect {
-        delete :destroy, {:id => question.to_param}, valid_session
-      }.to change(Question, :count).by(-1)
+    let :question do
+      mock_model(Question).tap do |q|
+        q.stub(:id) { 1 }
+      end
     end
 
-    it "redirects to the questions list" do
-      question = Question.create! valid_attributes
-      delete :destroy, {:id => question.to_param}, valid_session
-      response.should redirect_to(questions_url)
+    before do
+      Question.should_receive(:find).with('1').and_return(question)
+    end
+
+    context 'authorized' do
+      before do
+        should_not_authorize(:destroy, question)
+        delete :destroy, :id => question.id
+      end
+
+      it "should not be authorized" do
+        verify_authorization_unsuccessful
+      end
+    end
+
+    context 'authorized' do
+      before do
+        should_authorize(:destroy, question)
+        question.should_receive(:destroy)
+        delete :destroy, :id => question.id
+      end
+
+      it "should let you know question was deleted" do
+        flash[:notice] == 'Question was successfully destroyed.'
+      end
+
+      it "should return to the index" do
+        response.should redirect_to questions_path
+      end
+    end
+
+    context 'authorized' do
+      before do
+        should_not_authorize(:destroy, question)
+        delete :destroy, :id => question.id
+      end
+
+      it "should let you know question was deleted" do
+        verify_authorization_unsuccessful
+      end
     end
   end
 

@@ -1,10 +1,10 @@
 GenderOverflow::Application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => 'registrations'}
 
   devise_scope :user do
     get "/login" => "devise/sessions#new", :as => :login
     delete "/logout" => "devise/sessions#destroy", :as => :logout
-    get "/sign_up" => "devise/registrations#new", :as => :sign_up
+    get "/sign_up" => "registrations#new", :as => :sign_up
     get "/reset_password" => "devise/passwords#new", :as => :reset_password
   end
 
