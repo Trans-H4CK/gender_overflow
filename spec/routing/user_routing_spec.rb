@@ -12,7 +12,7 @@ describe 'user routing' do
     end
 
     it "sign_up" do
-      get("/sign_up").should route_to("devise/registrations#new")
+      get("/sign_up").should route_to("registrations#new")
     end
 
     it "reset password" do

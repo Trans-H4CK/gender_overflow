@@ -18,93 +18,77 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe QuestionsController do
-
-  describe "GET index" do
-    before do
-      @question = mock(Question)
-      Question.should_receive(:accessible_by).and_return([@question])
-      should_authorize(:index, Question)
-    end
-
-    it "assigns all questions as @questions" do
-      get :index
-      assigns(:questions).should eq([@question])
+describe AnswersController do
+  let :question do
+    mock_model(Question) do |q|
+      q.stub(:id) { 1 }
     end
   end
 
-  describe "GET show" do
-    before do
-      @question = mock_model(Question) do |q|
-        q.stub(:id) { '1' }
-      end
-      should_authorize(:show, @question)
-      Question.should_receive(:find).with('1').and_return(@question)
-    end
-
-    it "assigns the requested question as @question" do
-      get :show, :id => @question.id
-      assigns(:question).should eq(@question)
-    end
+  before do
+    Question.should_receive(:find).with('1').and_return(question)
   end
 
   describe "GET new" do
     before do
-      @question = mock_model(Question)
-      Question.should_receive(:new).and_return(@question)
+      @answer = mock_model(Answer)
+      Answer.should_receive(:new).and_return(@answer)
     end
 
     context 'not authorized' do
       before do
-        should_not_authorize(:new, @question)
+        should_not_authorize(:new, @answer)
       end
 
       it "should not be authorized" do
-        get :new
+        get :new, :question_id => question
         verify_authorization_unsuccessful
       end
     end
 
     context 'authorized' do
       before do
-        @question.should_receive(:user=)
-        should_authorize(:new, @question)
+        @answer.should_receive(:question=).with(question)
+        @answer.should_receive(:user=)
+        should_authorize(:new, @answer)
       end
 
-      it "assigns a new question as @question" do
-        get :new
-        assigns(:question).should == @question
+      it "assigns a new answer as @answer" do
+        get :new, :question_id => question
+        assigns(:answer).should == @answer
+        assigns(:question).should == question
       end
     end
   end
 
   describe "GET edit" do
     before do
-      @question = mock(Question).tap do |q|
+      @answer = mock(Answer).tap do |q|
         q.stub(:id) { 1 }
       end
-      Question.should_receive(:find).with('1').and_return(@question)
+      Answer.should_receive(:find).with('1').and_return(@answer)
     end
 
     context 'not authorized' do
       before do
-        should_not_authorize(:edit, @question)
+        should_not_authorize(:edit, @answer)
       end
 
       it "should not be authorized" do
-        get :edit, :id => @question.id
+        get :edit, :question_id => question, :id => @answer.id
         verify_authorization_unsuccessful
       end
     end
 
     context 'authorized' do
       before do
-        should_authorize(:edit, @question)
+        should_authorize(:edit, @answer)
       end
 
-      it "assigns given question as @question" do
-        get :edit, :id => @question.id
-        assigns(:question).should == @question
+      it "assigns given answer as @answer" do
+        get :edit, :question_id => question, :id => @answer.id
+        assigns(:answer).should == @answer
+        assigns(:question).should == question
       end
     end
   end
@@ -112,48 +96,49 @@ describe QuestionsController do
   describe "POST create" do
     let :params do
       {
-      :question => "What's up?"
+      :answer => "What's up?"
       }
     end
 
     before do
-      question.should_receive(:user=)
-      Question.should_receive(:new).with(params.with_indifferent_access).and_return(question)
+      answer.should_receive(:user=)
+      answer.should_receive(:question=)
+      Answer.should_receive(:new).with(params.with_indifferent_access).and_return(answer)
     end
 
     context 'authorized' do
       before do
-        should_authorize(:create, question)
-        post :create, :question => params
+        should_authorize(:create, answer)
+        post :create, :question_id => question, :answer => params
       end
 
       context "with valid params" do
 
-        let :question do
-          mock_model(Question).tap do |q|
+        let :answer do
+          mock_model(Answer).tap do |q|
             q.stub(:save) { true }
             q.stub(:id) { 1 }
           end
         end
 
         it "should notify success on create" do
-          flash[:notice].should == 'Question was successfully created.'
+          flash[:notice].should == 'Answer was successfully created.'
         end
 
-        it "redirects to the created question" do
-          response.should redirect_to(question_path(1))
+        it "redirects to the created answer" do
+          response.should redirect_to(question_path(question))
         end
       end
 
       describe "with invalid params" do
 
-        let :question do
-          mock_model(Question).tap do |q|
+        let :answer do
+          mock_model(Answer).tap do |q|
             q.stub(:save) { false }
           end
         end
 
-        it "redirects to the created question" do
+        it "redirects to the created answer" do
           response.should render_template(:new)
         end
       end
@@ -161,12 +146,12 @@ describe QuestionsController do
 
     context "not authorized" do
       before do
-        should_not_authorize(:create, question)
-        post :create, :question => params
+        should_not_authorize(:create, answer)
+        post :create, :question_id => question, :answer => params
       end
 
-      let :question do
-        mock_model(Question)
+      let :answer do
+        mock_model(Answer)
       end
 
       it "should notify success on create" do
@@ -178,46 +163,46 @@ describe QuestionsController do
   describe "PUT update" do
     let :params do
       {
-      :question => "What's up?"
+      :answer => "What's up?"
       }
     end
 
     before do
-      Question.should_receive(:find).with('1').and_return(question)
+      Answer.should_receive(:find).with('1').and_return(answer)
     end
 
     context 'authorized' do
       before do
-        should_authorize(:update, question)
-        put :update, :id => question.id, :question => params
+        should_authorize(:update, answer)
+        put :update, :question_id => question, :id => answer.id, :answer => params
       end
 
       describe "with valid params" do
-        let :question do
-          mock_model(Question).tap do |q|
+        let :answer do
+          mock_model(Answer).tap do |q|
             q.stub(:id) { 1 }
             q.stub(:update) { true }
           end
         end
 
         it "should notify success on create" do
-          flash[:notice].should == 'Question was successfully updated.'
+          flash[:notice].should == 'Answer was successfully updated.'
         end
 
-        it "redirects to the created question" do
-          response.should redirect_to(question_path(1))
+        it "redirects to the created answer" do
+          response.should redirect_to(question_path(question))
         end
       end
 
       describe "with invalid params" do
-        let :question do
-          mock_model(Question).tap do |q|
+        let :answer do
+          mock_model(Answer).tap do |q|
             q.stub(:id) { 1 }
             q.stub(:update) { false }
           end
         end
 
-        it "redirects to the created question" do
+        it "redirects to the created answer" do
           response.should render_template(:edit)
         end
       end
@@ -225,12 +210,12 @@ describe QuestionsController do
 
     context "not authorized" do
       before do
-        should_not_authorize(:update, question)
-        put :update, :id => question.id, :question => params
+        should_not_authorize(:update, answer)
+        put :update, :question_id => question, :id => answer.id, :answer => params
       end
 
-      let :question do
-        mock_model(Question).tap do |q|
+      let :answer do
+        mock_model(Answer).tap do |q|
           q.stub(:id) { 1 }
         end
       end
@@ -243,20 +228,20 @@ describe QuestionsController do
   end
 
   describe "DELETE destroy" do
-    let :question do
-      mock_model(Question).tap do |q|
+    let :answer do
+      mock_model(Answer).tap do |q|
         q.stub(:id) { 1 }
       end
     end
 
     before do
-      Question.should_receive(:find).with('1').and_return(question)
+      Answer.should_receive(:find).with('1').and_return(answer)
     end
 
     context 'authorized' do
       before do
-        should_not_authorize(:destroy, question)
-        delete :destroy, :id => question.id
+        should_not_authorize(:destroy, answer)
+        delete :destroy, :question_id => question, :id => answer.id
       end
 
       it "should not be authorized" do
@@ -266,27 +251,27 @@ describe QuestionsController do
 
     context 'authorized' do
       before do
-        should_authorize(:destroy, question)
-        question.should_receive(:destroy)
-        delete :destroy, :id => question.id
+        should_authorize(:destroy, answer)
+        answer.should_receive(:destroy)
+        delete :destroy, :question_id => question, :id => answer.id
       end
 
-      it "should let you know question was deleted" do
-        flash[:notice] == 'Question was successfully destroyed.'
+      it "should let you know answer was deleted" do
+        flash[:notice] == 'Answer was successfully destroyed.'
       end
 
       it "should return to the index" do
-        response.should redirect_to questions_path
+        response.should redirect_to question_path(question)
       end
     end
 
     context 'authorized' do
       before do
-        should_not_authorize(:destroy, question)
-        delete :destroy, :id => question.id
+        should_not_authorize(:destroy, answer)
+        delete :destroy, :question_id => question, :id => answer.id
       end
 
-      it "should let you know question was deleted" do
+      it "should let you know answer was deleted" do
         verify_authorization_unsuccessful
       end
     end

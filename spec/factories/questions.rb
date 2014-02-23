@@ -3,7 +3,5 @@
 FactoryGirl.define do
   factory :question do
     question "MyText"
-    category nil
-    user nil
   end
 end
