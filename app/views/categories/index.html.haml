@@ -2,3 +2,7 @@
 
 #categories
   = list_tree("categories/node", "categories/list", @categories)
+
+- if can? :create, Category
+  .new-category
+    = link_to "Add a new category", new_category_path

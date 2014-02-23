@@ -1,0 +1,18 @@
+= form_for @category do |f|
+  - if @category.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@question.errors.count, "error")} prohibited this question from being saved:"
+      %ul
+        - @category.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+
+  .field
+    = f.label :parent_id, "Parent Category"
+    = parent_category_selector(f)
+
+  .actions
+    = f.submit 'Save'

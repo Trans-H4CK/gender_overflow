@@ -11,11 +11,10 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.ui.all
 //= require jquery_ujs
+//= require jquery.selectBoxIt
 //= require common/ninjascript
 //= require_tree ./ninjascripts/
 //= require ninja-go
-//= require foundation
-//= require_tree .
 
-$(function(){ $(document).foundation(); });

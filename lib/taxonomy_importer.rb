@@ -66,7 +66,7 @@ class TaxonomyImporter
           {:name => "Disclosure"},
           {:name => "Dating"},
           {:name => "Sex"},
-          {:name => "Transitioning between identity communities (i.e., a person who is dyke-identified who undergoes transition as a masculine-identified trans person and leaves his dyke community)"},
+          {:name => "Transitioning between queer identity communities"}
         ]
       },
       {

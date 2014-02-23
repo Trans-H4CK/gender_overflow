@@ -6,4 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Category.create(:name => 'root')
+Category.create(:name => 'Top Level Category')
+
+User.create(:email => "transhackathon@gmail.com",
+            :login => "admin",
+            :admin => true,
+            :password => "codeitbetter",
+            :password_confirmation => "codeitbetter")

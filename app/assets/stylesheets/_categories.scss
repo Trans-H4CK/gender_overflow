@@ -1,0 +1,36 @@
+body.categories {
+  #categories {
+    ul {
+      list-style: none;
+    }
+    li {
+      clear: both;
+      .name {
+        color: #444444;
+        &.depth-0 {
+          font-size: 150%;
+        }
+        &.depth-1 {
+          font-size: 125%;
+        }
+        &.depth-2 {
+          font-size: 110%;
+        }
+        font-weight: bold;
+      }
+      .links {
+        padding-top: 10px;
+        float: right;
+      }
+      .children {
+        clear: both;
+        display: none;
+      }
+      padding-bottom: 5px;
+      border-bottom: 1px solid #444444;
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+}

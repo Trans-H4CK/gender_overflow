@@ -1,11 +1,13 @@
 %li{ :id => dom_id(node) }
-  - if depth > 0
-    - if depth > 1
-      %h6= node.name
-    - else
-      %h5= node.name
-  - else
-    %h3= node.name
-  = link_to "Expand", "#", :class => "category-expand"
-  - if defined? children
-    = children
+  %span{:class => "name depth-#{depth}"}= node.name
+  %span.links
+    -if defined? children
+      = link_to "Expand", "#", :class => "category-expand", :'data-text-show' => "Expand", :'data-text-hide' => "Collapse"
+      \|
+    = link_to "Show Questions", category_path(node)
+    - if can? :edit, node
+      \|
+      = link_to "Edit Category", edit_category_path(node)
+  .children
+    - if defined? children
+      = children
