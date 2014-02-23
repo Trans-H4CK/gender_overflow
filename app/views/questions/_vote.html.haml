@@ -1,0 +1,11 @@
+%p
+  %b Vote:
+  = answer.votes
+  - if answer.has_voted(user)
+    = link_to switch_vote_title(answer, user), switch_vote_question_answer_path(:question_id => question.id, :id => answer.id), :method => :put
+    \|
+    = link_to "Remove vote", delete_vote_question_answer_path(:question_id => question.id, :id => answer.id), :method => :delete
+  - else
+    = link_to "Up Vote", up_vote_question_answer_path(:question_id => question.id, :id => answer.id), :method => :post
+    \|
+    = link_to "Down vote", down_vote_question_answer_path(:question_id => question.id, :id => answer.id), :method => :post

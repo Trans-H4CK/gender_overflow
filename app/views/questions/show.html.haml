@@ -23,9 +23,7 @@
           %b Answer:
           = answer.answer
 
-        %p
-          %b Vote:
-          = answer.votes
+          = render :partial => "vote", locals: { question: @question, answer: answer, user: current_user }
 
         - if can? :update, answer
           %p

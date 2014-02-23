@@ -11,10 +11,10 @@ GenderOverflow::Application.routes.draw do
   resources :questions do
     resources :answers, :only => [:new, :edit, :create, :update, :destroy] do
       member do
-        post :'up-vote', :action => "up_vote"
-        post :'down-vote', :action => "down_vote"
-        put :'switch-vote', :action => "switch_vote"
-        delete :'delete-vote', :action => 'delete_vote'
+        post :'up-vote', :action => "up_vote", :as => :up_vote
+        post :'down-vote', :action => "down_vote", :as => :down_vote
+        put :'switch-vote', :action => "switch_vote", :as => :switch_vote
+        delete :'delete-vote', :action => 'delete_vote', :as => :delete_vote
       end
     end
   end
