@@ -2,7 +2,9 @@
   %ul.title-area
     %li.name
       %h1
-        = link_to "Gender Overflow", root_path
+        // =link_to (image_tag("GO.png", :alt => "Gender Overflow", :width => 75, :height => 75, :title => "Gender Overflow") "/")
+        // =image_tag "GO.png", :size => '75x75'
+        =link_to(image_tag("GO.png", :alt => "Gender Overflow", :title => "Home", :class=>"images", :id=>"GenderOverflow", :size => '90x90'), "/", :class=>"links", :id=>"logo_link")
     %li.toggle-topbar.menu-icon
       %a{:href => '#'}
         Menu
