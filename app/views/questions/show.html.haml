@@ -23,6 +23,10 @@
           %b Answer:
           = answer.answer
 
+        - if answer.youtube_id
+          %p
+            = youtube_embed(answer)
+
           = render :partial => "vote", locals: { question: @question, answer: answer, user: current_user }
 
         - if can? :update, answer

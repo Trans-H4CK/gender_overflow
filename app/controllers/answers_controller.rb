@@ -79,7 +79,7 @@ class AnswersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def answer_params
-      params.require(:answer).permit(:answer, :question_id, :user_id)
+      params.require(:answer).permit(:answer, :question_id, :user_id, :youtube_url)
     end
 
     def load_answer_and_authorize_vote
