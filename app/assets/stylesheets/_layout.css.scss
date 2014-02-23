@@ -4,17 +4,17 @@
 
 #footer {
   @include grid-row;
-
-    margin: 10px 5px;
-    padding: 10px 5px;
-    border: 1px solid #444444;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 10px;
-    border-radius: 5px;
-    p {
-    font-size: 50%;
-    text-align: center}
-    background-color: #efefef;
+  margin-top: 5px;
+  padding: 10px 5px;
+  border: 1px solid #444444;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 10px;
+  border-radius: 5px;
+  p {
+    font-size: 75%;
+    text-align: center
+  }
+  background-color: #efefef;
 }
 
 h1.headline {
@@ -42,17 +42,17 @@ h1, h2, h3, h4, h5 {
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
-	  
+
 	color: #444444;
 	background-color: #efefef;
-	
+
 	.question-row:hover .question-text {
 		font-weight: 700 !important;
 	}
 	.action-link:hover {
 		text-decoration: underline;
 	}
-	
+
 	.field label {
 		@include grid-column(2);
 	}
@@ -60,7 +60,7 @@ h1, h2, h3, h4, h5 {
 		@include grid-column(10);
 		height: 200px;
 	}
-	
+
 	.flash-notice {
 		background-color: #FFF79A;
 		color: #F26C4F;
