@@ -1,21 +1,23 @@
-%h1 Listing questions
+%div{:class => "content-tile"}
 
-%table
-  %tr
-    %th Question
-    %th User
-    %th
-    %th
-    %th
+  %h1 Questions from the Community
 
-  - @questions.each do |question|
+  %table
     %tr
-      %td= question.question
-      %td= question.user.login if question.user
-      %td= link_to 'Show', question
-      %td= link_to 'Edit', edit_question_path(question) #if can? :edit, question
-      %td= link_to 'Destroy', question, :method => :delete, :data => { :confirm => 'Are you sure?' } if can? :destroy, question
+      %th Question
+      %th User
+      %th
+      %th
+      %th
 
-%br
+    - @questions.each do |question|
+      %tr
+        %td= question.question
+        %td= question.user.login if question.user
+        %td= link_to 'Show', question
+        %td= link_to 'Edit', edit_question_path(question) #if can? :edit, question
+        %td= link_to 'Destroy', question, :method => :delete, :data => { :confirm => 'Are you sure?' } if can? :destroy, question
 
-= link_to 'New Question', new_question_path
+  %br
+
+  = link_to 'New Question', new_question_path
