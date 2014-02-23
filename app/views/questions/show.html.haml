@@ -7,7 +7,7 @@
 
   %p
     %b User:
-    = @question.user
+    = @question.user.login if @question.user
 
 #answers
   %h3 Answers:
