@@ -1,11 +1,5 @@
 - set_headline "Categories"
 
-%div{'class' => 'content-row chat-video buffer-bottom50'}
-  %div{'class' => 'col2'} &nbsp;
-  %div{'class' => 'col8 flex-video'}
-    %iframe{ 'src' => '//www.youtube.com/embed/1u5O0VWd_iU?list=UUcCBwVkB-q3ThmHYhGGRFiQ', 'frameborder' => '0', 'class' => 'youtube-media', 'style' => 'height:400px'}
-  %div{'class' => 'col2'} &nbsp;
-
 #categories
   = list_tree("categories/node", "categories/list", @categories)
 
