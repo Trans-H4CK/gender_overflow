@@ -13,6 +13,9 @@ input[type='submit']:hover {
 	background-color: #061362;
 }
 
+.actions {
+	margin-top: 4em;
+}
 .actions a {
   @extend .button;
   background-color: #ffffff;
@@ -68,15 +71,25 @@ input[type='submit']:hover {
   @include alert;
   @include radius($alert-radius);
   @include alert-style($alert-color);
+
+  background-color: #FFF79A;
+  
+  border: 1px solid #F26C4F;
+  padding: 10px 5px;
+  margin-bottom: 4em;
+  text-align: center;
+
   ul {
     list-style-position: inside;
+	list-style: none;
   }
   a.close {
     @include alert-close;
   }
-  h2 {
+  h5 {
     font-family: $body_font_family;
-    color: $alert_font_color;
+	color: #F26C4F;
+	margin-bottom: 1em;
   }
 }
 
