@@ -1,7 +1,6 @@
+- set_headline "Questions from the Community"
+
 %div{:class => "content-tile"}
-
-
-  %h1 Questions from the Community
 
   %p
     &nbsp;&nbsp;&nbsp;Kick in here with your questions, answer to help others, or just surf the wisdom of others.<br>
@@ -10,19 +9,11 @@
 
   %table
     %tr
-      %th Question
-      %th User
-      %th
-      %th
-      %th
-
-    - @questions.each do |question|
-      %tr
-        %td= question.question
-        %td= question.user.login if question.user
-        %td= link_to 'Show', question
-        %td= link_to 'Edit', edit_question_path(question) #if can? :edit, question
-        %td= link_to 'Destroy', question, :method => :delete, :data => { :confirm => 'Are you sure?' } if can? :destroy, question
+      %td= question.question
+      %td= question.user.login if question.user
+      %td= link_to 'Show', question
+      %td= link_to 'Edit', edit_question_path(question) if can? :edit, question
+      %td= link_to 'Destroy', question, :method => :delete, :data => { :confirm => 'Are you sure?' } if can? :destroy, question
 
   %br
 
