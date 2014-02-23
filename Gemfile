@@ -10,6 +10,7 @@ gem "sass"
 gem 'tinymce-rails'
 gem 'devise'
 gem 'cancan'
+gem 'awesome_nested_set', :git => 'https://github.com/collectiveidea/awesome_nested_set'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

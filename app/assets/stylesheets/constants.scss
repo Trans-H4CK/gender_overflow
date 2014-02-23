@@ -1,0 +1,28 @@
+$content_width: 960px;
+$admin_menu_height: 22px;
+$admin_background_color: #a4dae2;
+
+$light_background_color: #a4dae2;
+$medium_background_color: #457bbd;
+
+$all_input_types: 'input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], input[type="file"]';
+
+$header-font-family: "Orienta", sans-serif;
+$active-bg-color: #90e7fb;
+
+@mixin clearfix {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+$error_background: #e9b2b2;
+
+@mixin error_notice_colors {
+  border-width: 2px;
+  border-style: solid;
+  border-color: #ff4444;
+  background: $error_background;
+}

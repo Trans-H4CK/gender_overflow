@@ -1,0 +1,11 @@
+%li{ :id => dom_id(node) }
+  - if depth > 0
+    - if depth > 1
+      %h6= node.name
+    - else
+      %h5= node.name
+  - else
+    %h3= node.name
+  = link_to "Expand", "#"
+  - if defined? children
+    = children
