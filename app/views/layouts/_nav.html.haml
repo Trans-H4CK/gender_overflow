@@ -14,7 +14,7 @@
       %li= link_to "Categories", categories_path
     %ul.right
       - if current_user
-        %li= link_to "Edit User", edit_user_registration_path
+        %li= link_to "Edit Profile", edit_user_registration_path
         %li= link_to "Sign Out", logout_path, :method => :delete
       - else
         %li= link_to "Sign in", login_path unless current_page?(login_path)
