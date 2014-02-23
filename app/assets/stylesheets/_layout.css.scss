@@ -2,6 +2,12 @@
   @include grid-row;
 }
 
+h1.headline {
+	color: #efefef;
+	text-shadow: 2px 0 0 #555, -2px 0 0 #555, 0 2px 0 #555, 0 -2px 0 #555, 1px 1px #555, -1px -1px 0 #555, 1px -1px 0 #555, -1px 1px 0 #555;
+	margin: 15px auto 30px;
+}
+
 body {
 	background-color: #777;
 	background-image:url('bg.gif');
@@ -11,6 +17,7 @@ body {
 h1, h2, h3, h4, h5 {
 	color: #444444;
 }
+
 #content_body {
 	@include grid-row;
 
