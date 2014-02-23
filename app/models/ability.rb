@@ -11,6 +11,7 @@ class Ability
         can :create, Answer
         can :update, Answer, :user_id => user.id
         can :manage, User, :id => user.id
+        can :chat, Category
       end
     end
     can :read, Category
