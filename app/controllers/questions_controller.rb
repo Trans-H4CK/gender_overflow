@@ -2,6 +2,14 @@ class QuestionsController < ApplicationController
   before_filter :create_question, :only => :create
   load_and_authorize_resource
 
+  before_filter :check_for_cancel, :only => [:create, :update]
+
+  def check_for_cancel
+    if params[:commit] == "Cancel"
+      redirect_to questions_path
+    end
+  end
+  
   # GET /questions
   def index
   end

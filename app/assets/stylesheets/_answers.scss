@@ -1,0 +1,6 @@
+body.answers {
+  .youtube-explanation {
+    margin-top: 20px;
+    @include grid-column($columns: 10, $center: true);
+  }
+}

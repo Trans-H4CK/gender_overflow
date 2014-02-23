@@ -10,5 +10,19 @@
     = f.label :answer
     = f.text_area :answer
 
+  .field
+    = f.label :youtube_url, "Youtube Video"
+    = f.text_field :youtube_url
+
+  %p.youtube-explanation
+    %b How to add a video:
+    %br
+    1. Upload your video to youtube
+    %br
+    2. On your video's page, click on Share, the copy the URL underneath Share This Video
+    %br
+    = "It should look something like http://youtu.be/<number_here>".html_safe
+    3. Paste the URL in the field for your Youtube Video
+
   .actions
     = f.submit 'Submit Answer!'

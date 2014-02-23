@@ -1,12 +1,21 @@
 - set_headline "Questions from the Community"
 
-%p
-  &nbsp;&nbsp;&nbsp;Kick in here with your questions, answer to help others, or just surf the wisdom of others.<br>
-  &nbsp;&nbsp;&nbsp;Please stay focused on trans issues - medical, legal, social, political.<br>
-  &nbsp;&nbsp;&nbsp;Keep it clean and don't get mean.  Let's care for each other.
+%div{:class => "col1"}
+  &nbsp;
+%div{:class => "col10"}
+  %ol
+    %li
+      Kick in here with your questions, answer to help others, or just surf the wisdom of others.
+    %li
+      Please stay focused on trans issues - medical, legal, social, political.
+    %li
+      Keep it clean and don't get mean.  Let's care for each other.
+  %div{:class => "content-row buffer-top75"}  
+    = render :partial => "list", locals: { questions: @questions }
+%div{:class => "col1"}
+  &nbsp;
+  
 
-= render :partial => "list", locals: { questions: @questions }
 
-%br
-
-= link_to 'New Question', new_question_path
+%div{:class => "col12 text-right buffer-top50 action-link"}
+  = link_to 'Create a New Question >'.html_safe, new_question_path

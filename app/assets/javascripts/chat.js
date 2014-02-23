@@ -28,7 +28,7 @@ $(function() {
 
   }).then(function(result) {
     user = result.value;
-    user.displayName = $name.html();
+    user.displayName = $name.val();
 
     return messagesKey.get();
 
@@ -53,14 +53,15 @@ $(function() {
   });
 
   function addMessage(message) {
-    var $message = $('<li><div class="user-name"></div><div class="user-message"></div></li>');
+    //var $message = $('<li><div class="user-name"></div><div class="user-message"></div></li>');
+	var $message = $('<tr><td class="user-name"></td><td class="user-message"></td></tr>');
     $message.addClass('message');
 
     $message.children().first().text(message.name);
     $message.children().last().text(message.text);
 
     $messages.append($message);
-
+	console.log(message);
     $text.val('');
     _scrollBottom();
   }
@@ -71,7 +72,7 @@ $(function() {
     }
 
     var message = {
-      name: $name.html(),
+      name: $name.val(),
       text: $text.val()
     };
 
@@ -87,7 +88,7 @@ $(function() {
       return;
     }
 
-    var name = $name.html();
+    var name = $name.val();
 
     if (user.displayName === name) {
       return;
