@@ -18,3 +18,5 @@
 .ruby-gemset
 config/database.yml
 
+# Ignore Mac OS files
+.DS_Store
