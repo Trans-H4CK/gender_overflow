@@ -2,6 +2,21 @@
   @include grid-row;
 }
 
+#footer {
+  @include grid-row;
+
+    margin: 10px 5px;
+    padding: 10px 5px;
+    border: 1px solid #444444;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 10px;
+    border-radius: 5px;
+    p {
+    font-size: 50%;
+    text-align: center}
+    background-color: #efefef;
+}
+
 h1.headline {
 	color: #efefef;
 	text-shadow: 2px 0 0 #555, -2px 0 0 #555, 0 2px 0 #555, 0 -2px 0 #555, 1px 1px #555, -1px -1px 0 #555, 1px -1px 0 #555, -1px 1px 0 #555;
