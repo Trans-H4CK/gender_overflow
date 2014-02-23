@@ -9,6 +9,7 @@
 
     <title><%= content_for?(:title) ? yield(:title) : "Gender Overflow" %></title>
 
+    <%= javascript_include_tag "https://cdn.goinstant.net/v1/platform.min.js" %>
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= javascript_include_tag 'application.js' %>

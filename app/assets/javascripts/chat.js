@@ -22,7 +22,7 @@ $(function() {
 
   connect.then(function(result) {
     room = result.rooms[0];
-    messagesKey = room.key($room); 
+    messagesKey = room.key($room);
 
     return room.self().get();
 

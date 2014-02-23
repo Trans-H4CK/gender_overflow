@@ -1,0 +1,11 @@
+<% set_headline "Chat: #{@category.name}" %>
+<div class="container">
+  <div class="messages-wrapper">
+    <ul class="messages"></ul>
+  </div>
+  <div class="input">
+      <h3 class="chatName"><%= current_user.login %></h3>
+      <input type="hidden" value='category_<%= @category.id %>' class="chatCategory" name="chatCategory"/>
+      <input type="text" class="chatText" placeholder="Type a message!" />
+    </div>
+</div>

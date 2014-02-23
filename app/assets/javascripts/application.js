@@ -10,9 +10,11 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require lodash
 //= require jquery
 //= require jquery.ui.all
 //= require jquery_ujs
+//= require chat
 //= require jquery.selectBoxIt
 //= require common/ninjascript
 //= require_tree ./ninjascripts/
