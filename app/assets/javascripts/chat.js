@@ -89,7 +89,7 @@ $(function() {
     $message.children().eq(1).children().eq(1).text(message.text);
 
     $messages.append($message);
-	console.log(message);
+	
     $text.val('');
     _scrollBottom();
   }
