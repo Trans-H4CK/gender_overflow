@@ -15,6 +15,10 @@ body.chats .chat-video .flex-video {
 	text-align: center;
 }
 
+body.chats .messages {
+  @include grid-row;
+}
+
 body.chats .tranzlove-bg-img {
     /* IE 8 */
      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
@@ -30,9 +34,9 @@ body.chats .tranzlove-bg-img {
 
      /* Good browsers */
      opacity: 0.5;
-	 
+
 	 margin-top: 25px;
-}	 
+}
 
 body.chats span.user-name {
 	font-weight: 700;

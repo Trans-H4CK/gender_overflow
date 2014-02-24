@@ -15,7 +15,8 @@ $(function() {
 
   var $name = $('.chatName');
   var $text = $('.chatText');
-  var $messages = $('.messages');
+  var $submit = $('.chatSubmit');
+  var $messages = $('.messages tbody');
   var $room = $('.chatCategory').val();
 
   var connect = goinstant.connect(url);
@@ -30,14 +31,14 @@ $(function() {
     user = result.value;
     user.displayName = $name.val();
 
-    return messagesKey.get();
+    var query = messagesKey.query({}, { sort: { 'submittedOn' : 'desc' }, limit: 10 });
 
+    return query.execute();
   }).then(function(result) {
-    var messages = result.value;
-    var ordered = _.keys(messages).sort();
+    var messages = result;
 
-    _.each(ordered, function(id) {
-      addMessage(messages[id]);
+    _.eachRight(messages, function(message) {
+      addMessage(message.value);
     });
 
   }).fin(function() {
@@ -48,7 +49,8 @@ $(function() {
 
     messagesKey.on('add', options);
 
-    $text.on('keydown', handleMessage);
+    $text.on('keydown', handleKeyPress);
+    $submit.on('click', handleSubmit)
     $name.on('keydown blur', handleName);
   });
 
@@ -58,47 +60,57 @@ $(function() {
 	  var dateFormatted = "";
 
 	  if (dateString == "") return "";
-	  
+
 	  var dd = dateString.getDate();
 	  var mm = dateString.getMonth()+1;
 	  var yyyy = dateString.getFullYear();
 	  var hrs = dateString.getHours();
 	  var mins = dateString.getMinutes();
-	  	  
+
 	  mins = mins + (mins < 10 ? "0":"") + (hrs> 11 ? " PM":" AM");
 	  hrs = (hrs == 0)?12:(hrs < 13)?hrs:hrs-12;
-	  
-	  dateFormatted = mm + "/" + dd + "/" + yyyy + " " + hrs + ":" + mins; 
-	  
+
+	  dateFormatted = mm + "/" + dd + "/" + yyyy + " " + hrs + ":" + mins;
+
 	  return dateFormatted;
   }
-  
+
   function addMessage(message) {
     //var $message = $('<li><div class="user-name"></div><div class="user-message"></div></li>');
 	var $message = $('<tr><td><span class=\"user-name\"></span><br /></td><td><span class=\"submitted-on\"></span><span class="user-message"></span></td></tr>');
 	var submissionDate = formatDate(message.submittedOn)
-	
+
     $message.addClass('message');
 
     $message.children().first().children().first().text(message.name);
-	
+
 	if (submissionDate !== "") {
 	    $message.children().eq(1).children().first().text(submissionDate);
     }
-	
+
     $message.children().eq(1).children().eq(1).text(message.text);
 
     $messages.append($message);
-	
+
+    while ($messages.children().size() > 10) {
+      $messages.children().first().remove();
+    }
+
     $text.val('');
     _scrollBottom();
   }
 
-  function handleMessage(event) {
-    if (event.which !== 13) {
-      return;
+  function handleKeyPress(event) {
+    if (event.which == 13) {
+      handleMessage();
     }
+  }
 
+  function handleSubmit(event) {
+    handleMessage();
+  }
+
+  function handleMessage() {
     var message = {
       name: $name.val(),
       text: $text.val(),

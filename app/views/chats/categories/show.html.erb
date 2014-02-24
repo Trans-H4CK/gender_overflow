@@ -18,10 +18,14 @@
     <div class="col10 buffer-bottom50">
 	  <div class="messages-wrapper">
         <table class="messages">
-          <tr>
-            <th>User</th>
-            <th>Message</th>
-          </tr>
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Message</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tbody>
         </table>
 	  </div>
     </div>
@@ -35,6 +39,7 @@
     <input type="hidden" value='category_<%= @category.id %>' class="chatCategory" name="chatCategory"/>
 	<input type="hidden" value='<%= current_user.login %>' class="chatName" name="chatName"/>
     <input type="text" class="chatText" placeholder="Type a message!" />
+    <input name="commit" class="chatSubmit" type="submit" value="Send">
   </div>
   <div class="col2">&nbsp;</div>
 </div>
