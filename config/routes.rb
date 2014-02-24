@@ -22,6 +22,7 @@ GenderOverflow::Application.routes.draw do
   resources :categories
 
   namespace :chats do
+    resource :global, :only => [:show], :controller => 'global'
     resources :categories, :only => [:show]
   end
   # The priority is based upon order of creation: first created -> highest priority.

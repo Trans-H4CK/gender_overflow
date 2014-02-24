@@ -12,6 +12,7 @@
     %ul.left#user_tools
       %li= link_to "Questions", questions_path
       %li= link_to "Categories", categories_path
+      %li= link_to "Chat With Everyone", chats_global_path
     %ul.right
       - if current_user
         %li= link_to "Edit Profile", edit_user_registration_path

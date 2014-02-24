@@ -13,6 +13,7 @@ class Ability
         can :vote, Answer
         can :manage, User, :id => user.id
         can :chat, Category
+        can :show, :global_chat
       end
     end
     can :read, Category
