@@ -8,5 +8,8 @@ body.static {
   }
   .latest-activities{
     list-style: none;
+    li:last-child .seperator {
+      display: none;
+    }
   }
 }

@@ -24,10 +24,13 @@
 			<li>
 				<b><%= activity.user.login if activity.user %></b>
 				<% if activity.is_a?(Question) %>
-					asked <i><%= activity.question %></i>
+					asked <i><%= link_to activity.question, question_path(activity) %></i>
 				<% else %>
-					answered <i><%= activity.question.question %></i>
+					answered <i><%= link_to activity.question.question, question_path(activity.question) %></i>
 				<% end %>
+				<div class="seperator">
+				--
+				</div>
 			</li>
 		<% end %>
 	</ul>
