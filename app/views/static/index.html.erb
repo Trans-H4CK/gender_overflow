@@ -24,9 +24,9 @@
 			<li>
 				<b><%= activity.user.login if activity.user %></b>
 				<% if activity.is_a?(Question) %>
-					asked <%= activity.question %>
+					asked <i><%= activity.question %></i>
 				<% else %>
-					answered <%= activity.question.question %>
+					answered <i><%= activity.question.question %></i>
 				<% end %>
 			</li>
 		<% end %>
