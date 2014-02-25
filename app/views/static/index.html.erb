@@ -14,6 +14,21 @@
 		<iframe src="//www.youtube.com/embed/dO8rUiqiW-Q" frameborder="0" allowfullscreen class="youtube-media" style="height:400px"></iframe>
 	</div>
 	<div class="col2">
-		&nbsp;
+	  &nbsp;
 	</div>
+</div>
+<div class ="activity-block content-row">
+	<h3>Latest Activity</h3>
+	<ul class = "latest-activities">
+		<% @activities.each do |activity| %>
+			<li>
+				<b><%= activity.user.login if activity.user %></b>
+				<% if activity.is_a?(Question) %>
+					asked <%= activity.question %>
+				<% else %>
+					answered <%= activity.question.question %>
+				<% end %>
+			</li>
+		<% end %>
+	</ul>
 </div>
